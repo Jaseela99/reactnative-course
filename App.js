@@ -17,11 +17,13 @@ export default function App() {
       <Button title="add goal" onPress={addGoalHandler}/>
      </View>
      <View style={styles.listContainer}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       {goals.map((goal,idx)=>
       <View style={styles.goalContainer} key={idx}>
       <Text style={styles.goalText} >{goal}</Text>
       </View>
       )}
+      </ScrollView>
      </View>
     </View>
   );
