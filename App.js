@@ -16,18 +16,28 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer:{
-    padding:50
+    flex:1,
+    paddingTop:50,
+    paddingHorizontal:14
   },
   inputContainer:{
+    flex:1,
     flexDirection:"row",
-    justifyContent:"space-between"
+    justifyContent:"space-between",
+    alignItems:"center",
+    borderBottomWidth:1,
+    borderColor:"#c0c0c0"
   },
   input:{
   borderColor:"#c0c0c0",
   borderWidth:1,
-  width:'80%',
+  width:'70%',
   marginRight:10,
-  padding:8
+  padding:8,
+  borderRadius:10
   },
-  listContainer:{}
+  listContainer:{
+    flex:6,
+    marginTop:20
+  }
 });
