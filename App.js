@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View ,TextInput, ScrollView} from 'react-native';
+import { Button, StyleSheet, Text, View ,TextInput, ScrollView, FlatList} from 'react-native';
 import React,{useState} from "react"
 export default function App() {
   const[inputText,setInputText]=useState("")
@@ -7,7 +7,7 @@ export default function App() {
    setInputText(inputText)
   }
   const addGoalHandler=()=>{
-   setGoals((prev)=>[...prev,inputText])
+   setGoals((prev)=>[...prev,{text:inputText,id:Math.random().toString()}])
    setInputText("")
   }
   return (
@@ -17,13 +17,20 @@ export default function App() {
       <Button title="add goal" onPress={addGoalHandler}/>
      </View>
      <View style={styles.listContainer}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      {/* we use it for limited contents */}
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
       {goals.map((goal,idx)=>
       <View style={styles.goalContainer} key={idx}>
       <Text style={styles.goalText} >{goal}</Text>
       </View>
       )}
-      </ScrollView>
+      </ScrollView> */}
+      <FlatList data={goals} renderItem={(itemData)=>{
+      return ( <View style={styles.goalContainer} >
+       <Text style={styles.goalText} >{itemData.item.text}</Text>
+       </View>)
+      }}  showsVerticalScrollIndicator={false} keyExtractor={(item,index)=>item.id}/>
+      
      </View>
     </View>
   );
