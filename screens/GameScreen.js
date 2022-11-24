@@ -1,14 +1,24 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-
+import Title from '../components/Title'
 const GameScreen = () => {
   return (
-    <View>
-      <Text>GameScreen</Text>
+    <View style={styles.gameContainer}>
+      <Title>Guess Now!</Title>
+      <View>
+        <Text>Higher or Lower?</Text>
+      </View>
+      <View></View>
     </View>
   )
 }
 
 export default GameScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  gameContainer:{
+    flex:1,
+    padding:24
+  },
+ 
+})
