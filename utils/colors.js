@@ -6,5 +6,5 @@ export const Colors = {
   textColor: "white",
   titleColor: "#4b0082",
   textInputColor: "#ffe4e1",
-  numberBox: "#483d8b",
+  numberBox: "#800080",
 };
