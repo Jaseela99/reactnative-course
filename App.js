@@ -3,17 +3,17 @@ import StartGameScreen from './screens/StartGameScreen';
 
 export default function App() {
   return (
-    // <View style={styles.container}>
+    <View style={styles.container}>
       <StartGameScreen/>
-    // </View>
+  </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#d8bfd8',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
