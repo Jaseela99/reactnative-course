@@ -1,14 +1,12 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 
-const CustomButton = ({ children }) => {
-  const pressHandler = () => {
-    console.log("clicked");
-  };
+const CustomButton = ({ children,onPress }) => {
+  
   return (
     <View style={styles.buttonContainer}>
       <Pressable
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: "#bc8f8f" }}
         style={({ pressed }) =>
           pressed

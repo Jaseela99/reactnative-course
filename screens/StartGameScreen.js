@@ -1,8 +1,32 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import React from "react";
+import { StyleSheet, View, TextInput, Alert } from "react-native";
+import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 
 const StartGameScreen = () => {
+  const [enteredNumber, setEnteredNumber] = useState(""); //since the number from keypad will also be a string
+
+  const numberInputHandler = (entered) => {
+    setEnteredNumber(entered);
+  };
+  const resetInputHandler = () => {
+    setEnteredNumber("");
+  };
+  const confirmInputHandler = () => {
+    //logic to take in numbers only
+    const chosenNumber = parseInt(enteredNumber);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert("Invalid number!!!", "Number has to be between 1 and 99.", [
+        {
+          text: "Ok",
+          style: "destructive",
+          onPress: resetInputHandler,
+        },
+      ]);
+      return;
+    }
+    console.log("valid number!!")
+  };
+
   return (
     <View style={styles.startContainer}>
       <TextInput
@@ -10,14 +34,16 @@ const StartGameScreen = () => {
         maxLength={2}
         keyboardType="number-pad"
         autoCapitalize="none"
+        value={enteredNumber}
+        onChangeText={numberInputHandler}
       />
       <View style={styles.buttons}>
         <View style={styles.button}>
-        <CustomButton>Reset</CustomButton>
+          <CustomButton onPress={resetInputHandler}>Reset</CustomButton>
         </View>
-       <View style={styles.button}> 
-        <CustomButton>Start</CustomButton>
-       </View>
+        <View style={styles.button}>
+          <CustomButton onPress={confirmInputHandler}>Start</CustomButton>
+        </View>
       </View>
     </View>
   );
@@ -27,8 +53,8 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   startContainer: {
-    justifyContent:"center",
-    alignItems:"center",
+    justifyContent: "center",
+    alignItems: "center",
     padding: 24,
     backgroundColor: "#483d8b",
     marginTop: 24,
@@ -47,10 +73,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  buttons:{
-    flexDirection:"row",
+  buttons: {
+    flexDirection: "row",
   },
-  button:{
-  flex:1
-  }
+  button: {
+    flex: 1,
+  },
 });
