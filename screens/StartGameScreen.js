@@ -2,7 +2,7 @@ import { StyleSheet, View, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({numberPickedHandler}) => {
   const [enteredNumber, setEnteredNumber] = useState(""); //since the number from keypad will also be a string
 
   const numberInputHandler = (entered) => {
@@ -24,7 +24,7 @@ const StartGameScreen = () => {
       ]);
       return;
     }
-    console.log("valid number!!")
+    numberPickedHandler(chosenNumber)
   };
 
   return (
