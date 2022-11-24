@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert,FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -21,12 +21,17 @@ let maxBoundary = 100;
 const GameScreen = ({ number, gameOverHandler }) => {
   const initialGuess = generateRandomBetween(1, 100, number);
   const [guess, setGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (guess === number) {
       gameOverHandler();
     }
   }, [guess, number, gameOverHandler]);
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   const nextGuessHandler = (direction) => {
     if (
@@ -45,6 +50,7 @@ const GameScreen = ({ number, gameOverHandler }) => {
     }
     const newRandom = generateRandomBetween(minBoundary, maxBoundary, guess);
     setGuess(newRandom);
+    setGuessRounds(prev=>[...prev,newRandom])
   };
 
   return (
@@ -66,7 +72,11 @@ const GameScreen = ({ number, gameOverHandler }) => {
           </View>
         </View>
       </Card>
-      <View></View>
+      <View>
+      <FlatList data={guessRounds} 
+      renderItem={(itemData)=><Text>{itemData.item}</Text>}
+      keyExtractor={(item)=>item}/>
+      </View>
     </View>
   );
 };
@@ -78,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     justifyContent: "center",
-    fontFamily:"open-sans"
+    fontFamily: "open-sans",
   },
   buttonContainer: {
     flexDirection: "row",
