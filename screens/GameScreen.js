@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Alert,FlatList } from "react-native";
+import { StyleSheet, View, Alert, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -6,6 +6,7 @@ import CustomButton from "../components/CustomButton";
 import Card from "../components/Card";
 import CardTitle from "../components/CardTitle";
 import { Ionicons } from "@expo/vector-icons";
+import GuessLog from "../components/GuessLog";
 
 const generateRandomBetween = (min, max, exclude) => {
   const random = Math.floor(Math.random() * (max - min)) + min;
@@ -25,7 +26,7 @@ const GameScreen = ({ number, gameOverHandler }) => {
 
   useEffect(() => {
     if (guess === number) {
-      gameOverHandler();
+      gameOverHandler(guessRounds.length);
     }
   }, [guess, number, gameOverHandler]);
   useEffect(() => {
@@ -50,8 +51,9 @@ const GameScreen = ({ number, gameOverHandler }) => {
     }
     const newRandom = generateRandomBetween(minBoundary, maxBoundary, guess);
     setGuess(newRandom);
-    setGuessRounds(prev=>[...prev,newRandom])
+    setGuessRounds((prev) => [newRandom, ...prev]);
   };
+  const guessRoundsListLength = guessRounds.length;
 
   return (
     <View style={styles.gameContainer}>
@@ -72,10 +74,18 @@ const GameScreen = ({ number, gameOverHandler }) => {
           </View>
         </View>
       </Card>
-      <View>
-      <FlatList data={guessRounds} 
-      renderItem={(itemData)=><Text>{itemData.item}</Text>}
-      keyExtractor={(item)=>item}/>
+      <View style={styles.flatlist}>
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessLog
+              round={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(item) => item}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </View>
   );
@@ -87,7 +97,6 @@ const styles = StyleSheet.create({
   gameContainer: {
     flex: 1,
     padding: 24,
-    justifyContent: "center",
     fontFamily: "open-sans",
   },
   buttonContainer: {
@@ -99,4 +108,8 @@ const styles = StyleSheet.create({
   guesserText: {
     marginBottom: 16,
   },
+  flatlist:{
+    flex:1,
+    padding:16,
+  }
 });

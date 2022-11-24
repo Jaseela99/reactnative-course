@@ -7,4 +7,5 @@ export const Colors = {
   titleColor: "#4b0082",
   textInputColor: "#ffe4e1",
   numberBox: "#800080",
+  logColor:"#800000",
 };
