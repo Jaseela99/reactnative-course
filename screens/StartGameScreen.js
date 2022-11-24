@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     width: 50,
     textAlign: "center",
-    fontWeight: "bold",
+    fontFamily:"open-sans-bold"
   },
   buttons: {
     flexDirection: "row",

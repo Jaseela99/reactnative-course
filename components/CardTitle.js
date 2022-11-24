@@ -14,7 +14,7 @@ export default CardTitle
 const styles = StyleSheet.create({
     cardTitle: {
         fontSize: 20,
-        fontWeight: "500",
+        fontFamily:"open-sans",
         color: Colors.textColor,
         textAlign: "center",
       },

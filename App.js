@@ -1,28 +1,40 @@
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet, ImageBackground, SafeAreaView ,View} from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
-import ResultScreen from "./screens/ResultScreen"
+import ResultScreen from "./screens/ResultScreen";
+import {useFonts} from "expo-font"
+import AppLoading from "expo-app-loading"
+
 export default function App() {
+
   const [number, setNumber] = useState();
-  const [gameOver,setGameOver]=useState(true)
+  const [gameOver, setGameOver] = useState(true);
+
+  const [fontsLoaded]=useFonts({
+    'open-sans':require("./assets/fonts/OpenSans-Regular.ttf"),
+    'open-sans-bold':require("./assets/fonts/OpenSans-Bold.ttf"),
+  })
+
+  if(!fontsLoaded){
+    return <AppLoading/>
+  }
   const numberPickedHandler = (pickedNumber) => {
     setNumber(pickedNumber);
-    setGameOver(false)
+    setGameOver(false);
   };
-  const gameOverHandler=()=>{
-    setGameOver(true)
-  }
+  const gameOverHandler = () => {
+    setGameOver(true);
+  };
   let screen = <StartGameScreen numberPickedHandler={numberPickedHandler} />;
   if (number) {
-    screen = <GameScreen number={number} gameOverHandler={gameOverHandler}/>;
+    screen = <GameScreen number={number} gameOverHandler={gameOverHandler} />;
   }
-  if (gameOver && number){
-    screen=<ResultScreen/>
+  if (gameOver && number) {
+    screen = <ResultScreen />;
   }
 
- 
   return (
     <LinearGradient style={styles.container} colors={["#d8bfd8", "#ffb6c1"]}>
       <ImageBackground
@@ -31,7 +43,7 @@ export default function App() {
         style={styles.container}
         imageStyle={styles.background}
       >
-        <View style={styles.container}>{screen}</View>
+        <SafeAreaView style={styles.container}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
@@ -40,8 +52,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent:"center",
-    // alignItems:"center"
+    justifyContent: "center",
   },
   background: {
     opacity: 0.09,

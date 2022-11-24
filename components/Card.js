@@ -14,6 +14,7 @@ export default Card
 
 const styles = StyleSheet.create({
     card: {
+      fontFamily:"open-sans",
         justifyContent: "center",
         alignItems: "center",
         padding: 24,

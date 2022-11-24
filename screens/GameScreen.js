@@ -5,6 +5,8 @@ import NumberContainer from "../components/NumberContainer";
 import CustomButton from "../components/CustomButton";
 import Card from "../components/Card";
 import CardTitle from "../components/CardTitle";
+import { Ionicons } from "@expo/vector-icons";
+
 const generateRandomBetween = (min, max, exclude) => {
   const random = Math.floor(Math.random() * (max - min)) + min;
   if (random === exclude) {
@@ -31,7 +33,7 @@ const GameScreen = ({ number, gameOverHandler }) => {
       (direction === "lower" && guess < number) ||
       (direction === "higher" && guess > number)
     ) {
-      Alert.alert("Lie", "Don't try to fool me!!", [
+      Alert.alert("gotchaa!!", "Don't try to fool me!!", [
         { text: "Sorry", style: "cancel" },
       ]);
       return;
@@ -47,19 +49,19 @@ const GameScreen = ({ number, gameOverHandler }) => {
 
   return (
     <View style={styles.gameContainer}>
-      <Title>Guess Now!</Title>
+      <Title>Give me some clues!</Title>
       <NumberContainer>{guess}</NumberContainer>
       <Card>
         <CardTitle style={styles.guesserText}>Higher or Lower?</CardTitle>
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <CustomButton onPress={nextGuessHandler.bind(this, "higher")}>
-              +
+              <Ionicons name="md-add" size={24} color={"white"} />
             </CustomButton>
           </View>
           <View style={styles.button}>
             <CustomButton onPress={nextGuessHandler.bind(this, "lower")}>
-              -
+              <Ionicons name="md-remove" size={24} color={"white"} />
             </CustomButton>
           </View>
         </View>
@@ -75,14 +77,16 @@ const styles = StyleSheet.create({
   gameContainer: {
     flex: 1,
     padding: 24,
+    justifyContent: "center",
+    fontFamily:"open-sans"
   },
   buttonContainer: {
     flexDirection: "row",
   },
-  button:{
-    flex:1
+  button: {
+    flex: 1,
   },
-  guesserText:{
-    marginBottom:16
-  }
+  guesserText: {
+    marginBottom: 16,
+  },
 });
