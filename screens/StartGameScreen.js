@@ -4,6 +4,7 @@ import CustomButton from "../components/CustomButton";
 import { Colors } from "../utils/colors";
 import Card from "../components/Card";
 import CardTitle from "../components/CardTitle";
+import Title from "../components/Title";
 const StartGameScreen = ({ numberPickedHandler }) => {
   const [enteredNumber, setEnteredNumber] = useState(""); //since the number from keypad will also be a string
 
@@ -30,6 +31,8 @@ const StartGameScreen = ({ numberPickedHandler }) => {
   };
 
   return (
+    <View style={styles.startContainer}>
+    <Title>Game Of Numbers!!</Title>
     <Card>
       <CardTitle>Pick Your Number</CardTitle>
       <TextInput
@@ -49,13 +52,18 @@ const StartGameScreen = ({ numberPickedHandler }) => {
         </View>
       </View>
     </Card>
+    </View>
   );
 };
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
- 
+ startContainer:{
+ flex:1,
+ padding:20,
+ justifyContent:"center"
+ },
 
   textInput: {
     height: 70,
