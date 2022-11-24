@@ -4,7 +4,7 @@ import React from 'react'
 const ResultScreen = () => {
   return (
     <View>
-      <Text>GameOverScreen</Text>
+      <Text>GameOver!!</Text>
     </View>
   )
 }

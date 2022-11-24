@@ -1,9 +1,10 @@
-import { StyleSheet, View, TextInput, Alert } from "react-native";
+import { StyleSheet, View, TextInput, Alert, Text } from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { Colors } from "../utils/colors";
-
-const StartGameScreen = ({numberPickedHandler}) => {
+import Card from "../components/Card";
+import CardTitle from "../components/CardTitle";
+const StartGameScreen = ({ numberPickedHandler }) => {
   const [enteredNumber, setEnteredNumber] = useState(""); //since the number from keypad will also be a string
 
   const numberInputHandler = (entered) => {
@@ -25,11 +26,12 @@ const StartGameScreen = ({numberPickedHandler}) => {
       ]);
       return;
     }
-    numberPickedHandler(chosenNumber)
+    numberPickedHandler(chosenNumber);
   };
 
   return (
-    <View style={styles.startContainer}>
+    <Card>
+      <CardTitle>Pick Your Number</CardTitle>
       <TextInput
         style={styles.textInput}
         maxLength={2}
@@ -46,29 +48,21 @@ const StartGameScreen = ({numberPickedHandler}) => {
           <CustomButton onPress={confirmInputHandler}>Start</CustomButton>
         </View>
       </View>
-    </View>
+    </Card>
   );
 };
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  startContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 24,
-    backgroundColor:Colors.numberBox,
-    marginTop: 24,
-    marginHorizontal: 16,
-    borderRadius: 8,
-    elevation: 6, //android specific property for shadow
-  },
+ 
+
   textInput: {
     height: 70,
     fontSize: 32,
     borderBottomColor: Colors.textInputColor,
     borderBottomWidth: 2,
-    color:Colors.textInputColor,
+    color: Colors.textInputColor,
     marginVertical: 8,
     width: 50,
     textAlign: "center",
@@ -76,6 +70,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    padding: 16,
   },
   button: {
     flex: 1,
