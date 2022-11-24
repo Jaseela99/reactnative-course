@@ -1,6 +1,7 @@
 import { StyleSheet, View, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
+import { Colors } from "../utils/colors";
 
 const StartGameScreen = ({numberPickedHandler}) => {
   const [enteredNumber, setEnteredNumber] = useState(""); //since the number from keypad will also be a string
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 24,
-    backgroundColor: "#483d8b",
+    backgroundColor:Colors.numberBox,
     marginTop: 24,
     marginHorizontal: 16,
     borderRadius: 8,
@@ -65,9 +66,9 @@ const styles = StyleSheet.create({
   textInput: {
     height: 70,
     fontSize: 32,
-    borderBottomColor: "#ffe4e1",
+    borderBottomColor: Colors.textInputColor,
     borderBottomWidth: 2,
-    color: "#ffe4e1",
+    color:Colors.textInputColor,
     marginVertical: 8,
     width: 50,
     textAlign: "center",
