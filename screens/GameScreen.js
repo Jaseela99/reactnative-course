@@ -1,4 +1,10 @@
-import { StyleSheet, View, Alert, FlatList, useWindowDimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -19,13 +25,12 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-
 const GameScreen = ({ number, gameOverHandler }) => {
   const initialGuess = generateRandomBetween(1, 100, number);
   const [guess, setGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
-  
-  const {height,}=useWindowDimensions()
+
+  const { height, width } = useWindowDimensions();
   useEffect(() => {
     if (guess === number) {
       gameOverHandler(guessRounds.length);
@@ -56,10 +61,8 @@ const GameScreen = ({ number, gameOverHandler }) => {
     setGuessRounds((prev) => [newRandom, ...prev]);
   };
   const guessRoundsListLength = guessRounds.length;
-  const padding= height<380 ? 16:24
-  return (
-    <View style={[styles.gameContainer,{padding:padding}]}>
-      <Title>Give me some clues!</Title>
+  const padding = height < 380 ? 16 : 24;
+  let content = (<>
       <NumberContainer>{guess}</NumberContainer>
       <Card>
         <CardTitle style={styles.guesserText}>Higher or Lower?</CardTitle>
@@ -76,6 +79,33 @@ const GameScreen = ({ number, gameOverHandler }) => {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if(width>500){
+    content = <>
+        <View style={styles.landscapeContainer}>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <CustomButton onPress={nextGuessHandler.bind(this, "higher")}>
+              <Ionicons name="md-add" size={24} color={"white"} />
+            </CustomButton>
+          </View>
+        <NumberContainer>{guess}</NumberContainer>
+          <View style={styles.button}>
+            <CustomButton onPress={nextGuessHandler.bind(this, "lower")}>
+              <Ionicons name="md-remove" size={24} color={"white"} />
+            </CustomButton>
+          </View>
+        </View>
+        </View>
+    </>
+    
+  }
+  return (
+    <View style={[styles.gameContainer, { padding: padding }]}>
+      <Title>Give me some clues!</Title>
+      {content}
       <View style={styles.flatlist}>
         <FlatList
           data={guessRounds}
@@ -100,10 +130,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     fontFamily: "open-sans",
-    alignItems:"center"
+    alignItems: "center",
   },
   buttonContainer: {
     flexDirection: "row",
+    alignItems:"center"
   },
   button: {
     flex: 1,
@@ -111,8 +142,12 @@ const styles = StyleSheet.create({
   guesserText: {
     marginBottom: 16,
   },
-  flatlist:{
-    flex:1,
-    padding:16,
+  flatlist: {
+    flex: 1,
+    padding: 16,
+  },
+  landscapeContainer:{
+    flexDirection:"row",
+    alignItems:"center",
   }
 });

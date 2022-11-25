@@ -17,15 +17,15 @@ const styles = StyleSheet.create({
   numberContainer: {
     borderWidth: 2,
     borderColor: Colors.numberBox,
-    padding: deviceWidth < 390 ? 12 :24,
+    padding: deviceWidth < 380 ? 12 :24,
     borderRadius: 8,
-    margin:deviceWidth < 390 ? 12 :24,
+    margin:deviceWidth < 380 ? 12 :24,
     alignItems:"center",
     justifyContent:"center"
   },
   numberText:{
     color:Colors.numberBox,
-    fontSize:deviceWidth < 390 ? 28 :36,
+    fontSize:deviceWidth < 380 ? 28 :36,
     fontFamily:"open-sans-bold"
   }
 });

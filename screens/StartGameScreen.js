@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput, Alert,} from "react-native";
+import { StyleSheet, View, TextInput, Alert,KeyboardAvoidingView,ScrollView} from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { Colors } from "../utils/colors";
@@ -31,6 +31,8 @@ const StartGameScreen = ({ numberPickedHandler }) => {
   };
 
   return (
+    <ScrollView style={styles.screen}>
+    <KeyboardAvoidingView style={styles.screen} behavior="position">
     <View style={styles.startContainer}>
     <Title>Game Of Numbers!!</Title>
     <Card>
@@ -53,6 +55,8 @@ const StartGameScreen = ({ numberPickedHandler }) => {
       </View>
     </Card>
     </View>
+    </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
@@ -60,6 +64,9 @@ export default StartGameScreen;
 
 
 const styles = StyleSheet.create({
+  screen:{
+    flex:1
+  },
  startContainer:{
  flex:1,
  padding:20,
