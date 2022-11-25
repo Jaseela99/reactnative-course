@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput, Alert} from "react-native";
+import { StyleSheet, View, TextInput, Alert,} from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import { Colors } from "../utils/colors";
@@ -58,11 +58,12 @@ const StartGameScreen = ({ numberPickedHandler }) => {
 
 export default StartGameScreen;
 
+
 const styles = StyleSheet.create({
  startContainer:{
  flex:1,
  padding:20,
- justifyContent:"center"
+ alignItems:"center"
  },
 
   textInput: {

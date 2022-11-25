@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, FlatList } from "react-native";
+import { StyleSheet, View, Alert, FlatList, useWindowDimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import NumberContainer from "../components/NumberContainer";
@@ -19,11 +19,13 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
+
 const GameScreen = ({ number, gameOverHandler }) => {
   const initialGuess = generateRandomBetween(1, 100, number);
   const [guess, setGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
-
+  
+  const {height,}=useWindowDimensions()
   useEffect(() => {
     if (guess === number) {
       gameOverHandler(guessRounds.length);
@@ -54,9 +56,9 @@ const GameScreen = ({ number, gameOverHandler }) => {
     setGuessRounds((prev) => [newRandom, ...prev]);
   };
   const guessRoundsListLength = guessRounds.length;
-
+  const padding= height<380 ? 16:24
   return (
-    <View style={styles.gameContainer}>
+    <View style={[styles.gameContainer,{padding:padding}]}>
       <Title>Give me some clues!</Title>
       <NumberContainer>{guess}</NumberContainer>
       <Card>
