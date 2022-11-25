@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         fontSize:24,
         textAlign:"center",
          color:Colors.titleColor,
-        //  borderBottomWidth:Platform.OS === "android"? 2:0,
-        borderWidth:Platform.select({ios:0,android:2}),
+         borderBottomWidth:Platform.OS === "android"? 2:0,
+        //borderBottomWidth:Platform.select({ios:0,android:2}),
          borderBottomColor:Colors.titleColor,
          padding:16,
         // maxWidth:"80%"
