@@ -1,4 +1,4 @@
-import { StyleSheet,View,Image,Text } from 'react-native'
+import { StyleSheet,View,Image,Text, Dimensions } from 'react-native'
 import React from 'react'
 import Title from "../components/Title"
 import CustomButton from "../components/CustomButton"
@@ -17,6 +17,9 @@ const ResultScreen = ({rounds,number,newGameHandler}) => {
   )
 }
 
+
+const deviceWidth=Dimensions.get('window').width
+
 export default ResultScreen
 
 const styles = StyleSheet.create({
@@ -27,9 +30,9 @@ const styles = StyleSheet.create({
     alignItems:"center"
   },
   resultImage:{
-    borderRadius:200,
-    height:300,
-    width:300,
+    borderRadius:deviceWidth< 390 ?75: 150,
+    height:deviceWidth< 390 ?150: 300,
+    width:deviceWidth< 390 ?150: 300,
     borderWidth:3,
     borderColor:Colors.ripple,
     overflow:"hidden",

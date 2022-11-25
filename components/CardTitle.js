@@ -18,4 +18,5 @@ const styles = StyleSheet.create({
         color: Colors.textColor,
         textAlign: "center",
       },
+
 })

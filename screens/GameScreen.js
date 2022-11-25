@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     fontFamily: "open-sans",
+    alignItems:"center"
   },
   buttonContainer: {
     flexDirection: "row",
