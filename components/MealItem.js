@@ -7,21 +7,33 @@ import {
   Dimensions,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import AboutMeal from "./AboutMeal";
 
-const MealItem = ({ title, imageUrl, affordability, complexity, duration }) => {
+const MealItem = ({
+  id,
+  title,
+  imageUrl,
+  affordability,
+  complexity,
+  duration,
+}) => {
+  const navigation = useNavigation();
+  const onMealPress = () => {
+    navigation.navigate("MealDetails", {
+      mealId: id,
+    });
+  };
   return (
     <View style={styles.mealItem}>
       <View style={styles.innerContainer}>
-        <Pressable android_ripple={{color:""}}>
+        <Pressable android_ripple={{ color: "" }} onPress={onMealPress}>
           <View>
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailItem}>{duration}min</Text>
-            <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-          </View>
+          <AboutMeal
+          affordability={affordability} duration={duration} complexity={complexity} />
         </Pressable>
       </View>
     </View>
@@ -39,9 +51,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 4,
   },
-  innerContainer:{
-   borderRadius:8,
-   overflow:"hidden"
+  innerContainer: {
+    borderRadius: 8,
+    overflow: "hidden",
   },
 
   image: {
@@ -54,14 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 8,
   },
-  details: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
-  },
+  
 });
