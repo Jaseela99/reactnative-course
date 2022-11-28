@@ -4,14 +4,18 @@ import { CATEGORIES } from '../data/dummyData'
 import CategoryGridTile from '../components/CategoryGridTile'
 
 
-const renderIteminFlatList=(itemData)=>{
-return <CategoryGridTile title={itemData.item.title} color={itemData.item.color}/>
-}
-
-const CategoriesScreen = () => {
+const CategoriesScreen = ({navigation}) => {
+  
+  const renderIteminFlatList=(itemData)=>{
+    const handlePressCategories=()=>{
+    navigation.navigate("Meals")
+    }
+  return <CategoryGridTile title={itemData.item.title} color={itemData.item.color} onPress={handlePressCategories}/>
+  }
+  
   return (
     <View>
-     <FlatList data={CATEGORIES} renderItem={renderIteminFlatList} keyExtractor={(itemData)=>itemData.id}/>
+     <FlatList data={CATEGORIES} renderItem={renderIteminFlatList} keyExtractor={(itemData)=>itemData.id} numColumns={2}/>
     </View>
   )
 }
