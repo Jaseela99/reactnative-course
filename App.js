@@ -10,11 +10,39 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Categories">
-          <Stack.Screen name="Categories" component={CategoriesScreen} />
-          <Stack.Screen name="Meals" component={MealsScreen} />
+        <Stack.Navigator
+          initialRouteName="Categories"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#8b008b",
+            },
+            headerTitleAlign: "center",
+            headerTintColor: "white",
+            contentStyle: {
+              backgroundColor: "#fff0f5",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="Categories"
+            component={CategoriesScreen}
+            options={{
+              title: "All Categories",
+            }}
+          />
+          <Stack.Screen
+            name="Meals"
+            component={MealsScreen}
+        //to set title dynamically
+
+            // options={({route,navigation})=>{
+            //   const catId= route.params.categoryId
+            //   return {
+            //    title:catId
+            // }}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
