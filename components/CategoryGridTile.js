@@ -1,37 +1,28 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Platform,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import CardWrapper from "./CardWrapper";
 
-const CategoryGridTile = ({ title, color ,onPress}) => {
+const CategoryGridTile = ({ title, color, onPress }) => {
   return (
-    <View style={styles.gridItem}>
-      <Pressable style={({ pressed }) => [styles.pressable,pressed ? styles.press :null]} onPress={onPress}>
+    <CardWrapper>
+      <Pressable
+        style={({ pressed }) => [
+          styles.pressable,
+          pressed ? styles.press : null,
+        ]}
+        onPress={onPress}
+      >
         <View style={[styles.gridInnerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>
         </View>
       </Pressable>
-    </View>
+    </CardWrapper>
   );
 };
 
 export default CategoryGridTile;
-const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-  gridItem: {
-    margin: 16,
-    elevation: 2,
-    borderRadius: 8,
-    flex: 1,
-    height: windowHeight / 5,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
-  },
   pressable: {
     flex: 1,
   },
