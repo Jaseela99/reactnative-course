@@ -8,7 +8,9 @@ const CategoriesScreen = ({navigation}) => {
   
   const renderIteminFlatList=(itemData)=>{
     const handlePressCategories=()=>{
-    navigation.navigate("Meals")
+    navigation.navigate("Meals",{
+      categoryId:itemData.item.id
+    })
     }
   return <CategoryGridTile title={itemData.item.title} color={itemData.item.color} onPress={handlePressCategories}/>
   }
