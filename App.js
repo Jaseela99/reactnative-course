@@ -14,7 +14,7 @@ export default function App() {
         screenOptions={{
           drawerActiveBackgroundColor: "black",
           drawerActiveTintColor: "white",
-          drawerStyle: { backgroundColor: "gray" },
+          drawerStyle: { backgroundColor: "#dda0dd" },
           headerStyle: { backgroundColor: "#9932cc" },
           headerTintColor: "white",
           drawerPosition:"right"
