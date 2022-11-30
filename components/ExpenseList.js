@@ -1,4 +1,4 @@
-import { StyleSheet,FlatList, Text,View } from 'react-native'
+import { StyleSheet,FlatList } from 'react-native'
 import React from 'react'
 import ExpenseItem from './ExpenseItem'
 
