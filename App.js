@@ -22,7 +22,7 @@ tabBarStyle:{
   backgroundColor:GlobalStyles.colors.primary450
 },
 headerStyle:{
-  backgroundColor:GlobalStyles.colors.primary450
+  backgroundColor:GlobalStyles.colors.primary450,
 },
 headerTintColor:GlobalStyles.colors.white
   }}>

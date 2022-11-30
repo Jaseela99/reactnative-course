@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
+import ExpensesCard from '../components/ExpensesCard'
 
 const AllExpenses = () => {
   return (
     <View>
-      <Text>AllExpenses</Text>
+     <ExpensesCard periodName="Total"/>
     </View>
   )
 }

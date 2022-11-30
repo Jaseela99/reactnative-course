@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import ExpensesCard from '../components/ExpensesCard'
 
 const RecentExpenses = () => {
   return (
     <View>
-      <Text>RecentExpenses</Text>
+      <ExpensesCard periodName="Last 7 days"/>
     </View>
   )
 }
