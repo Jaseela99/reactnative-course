@@ -13,16 +13,23 @@ const ManageExpense = ({ route, navigation }) => {
     });
   }, [navigation, isEditing]);
 
-  const deleteExpenseHandler = () => {};
-  const cancelHandler = () => {};
-  const confirmHandler = () => {};
+  const deleteExpenseHandler = () => {
+    navigation.goBack();
+  };
+  const cancelHandler = () => {
+    navigation.goBack();
+  };
+  const confirmHandler = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <CustomButton mode="flat" onPress={cancelHandler} style={styles.button}>
           Cancel
         </CustomButton>
-        <CustomButton  onPress={confirmHandler} style={styles.button}>
+        <CustomButton onPress={confirmHandler} style={styles.button}>
           {isEditing ? "Update" : "Add"}
         </CustomButton>
       </View>
@@ -32,7 +39,7 @@ const ManageExpense = ({ route, navigation }) => {
             icon="trash"
             color={GlobalStyles.colors.primary450}
             size={24}
-            onPress={() => {}}
+            onPress={deleteExpenseHandler}
           />
         </View>
       )}
@@ -60,7 +67,8 @@ const styles = StyleSheet.create({
     borderTopColor: GlobalStyles.colors.primary400,
     alignItems: "center",
   },
-  button:{
-    minWidth:120,
-    marginHorizontal:20  }
+  button: {
+    minWidth: 120,
+    marginHorizontal: 20,
+  },
 });
