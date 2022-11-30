@@ -1,11 +1,6 @@
 import {createContext, useReducer} from "react"
 
-export const ExpensesContext=createContext({
-expenses:[],
-addExpense:({description,amount,date})=>{},
-updateExpense:(id)=>{},
-deleteExpense:(id,{description,amount,date})=>{}
-})
+
 const DUMMY_EXPENSES=[
     {
         id:'e1',
@@ -33,11 +28,16 @@ const DUMMY_EXPENSES=[
     },
 ]
 
-
+export const ExpensesContext=createContext({
+    expenses:[],
+    addExpense:({description,amount,date})=>{},
+    updateExpense:(id)=>{},
+    deleteExpense:(id,{description,amount,date})=>{}
+    })
 const expensesReducer=(state,action)=>{
   switch(action.type) {
     case "ADD":
-        const id= new Date().toString() +Math.random().toString()
+        const id= new Date().toString() + Math.random().toString()
         return [{...action.payload,id:id},...state]
     case "UPDATE":
         const updatableExpenseIndex=state.findIndex((expense)=>expense.id===action.payload.id)
@@ -56,7 +56,7 @@ const expensesReducer=(state,action)=>{
 const ExpensesContextProvider=({children})=>{
    const [expensesState,dispatch]= useReducer(expensesReducer,DUMMY_EXPENSES)
 
-   const addExpense=({expenseData})=>{
+   const addExpense=(expenseData)=>{
     dispatch({type:"ADD",payload:expenseData})
    }
    const deleteExpense=(id)=>{
@@ -72,7 +72,7 @@ const ExpensesContextProvider=({children})=>{
     deleteExpense:deleteExpense,
     updateExpense:updateExpense
    }
-    return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>
+    return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>
 }
 
 export default ExpensesContextProvider

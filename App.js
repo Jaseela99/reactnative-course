@@ -9,6 +9,7 @@ import ManageExpense from "./screens/ManageExpense";
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalStyles } from "./constants/styles";
 import IconButton from "./components/UI components/IconButton";
+import ExpensesContextProvider from "./store/expenses-context";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,32 +71,34 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="View Expenses"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: GlobalStyles.colors.primary350,
-            },
-            headerTintColor: GlobalStyles.colors.white,
-          }}
-        >
-          <Stack.Screen
-            name="View Expenses"
-            component={ViewExpenses}
-            options={{
-              headerShown: false,
+      <ExpensesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="View Expenses"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: GlobalStyles.colors.primary350,
+              },
+              headerTintColor: GlobalStyles.colors.white,
             }}
-          />
-          <Stack.Screen
-            name="Manage Expense"
-            component={ManageExpense}
-            options={{
-              presentation: "modal",
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="View Expenses"
+              component={ViewExpenses}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Manage Expense"
+              component={ManageExpense}
+              options={{
+                presentation: "modal",
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ExpensesContextProvider>
     </>
   );
 }
