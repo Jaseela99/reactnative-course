@@ -4,9 +4,7 @@ import ExpensesCard from '../components/ExpensesCard'
 
 const AllExpenses = () => {
   return (
-    <View>
      <ExpensesCard periodName="Total"/>
-    </View>
   )
 }
 

@@ -19,10 +19,10 @@ tabBarLabelStyle:{
   fontSize:12
 },
 tabBarStyle:{
-  backgroundColor:GlobalStyles.colors.primary450
+  backgroundColor:GlobalStyles.colors.primary350
 },
 headerStyle:{
-  backgroundColor:GlobalStyles.colors.primary450,
+  backgroundColor:GlobalStyles.colors.primary350,
 },
 headerTintColor:GlobalStyles.colors.white
   }}>

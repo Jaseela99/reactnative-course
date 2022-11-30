@@ -4,9 +4,7 @@ import ExpensesCard from '../components/ExpensesCard'
 
 const RecentExpenses = () => {
   return (
-    <View>
       <ExpensesCard periodName="Last 7 days"/>
-    </View>
   )
 }
 
