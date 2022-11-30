@@ -6,7 +6,7 @@ import {useNavigation} from "@react-navigation/native"
 const ExpenseItem = ({description,amount,date}) => {
     const navigation=useNavigation()
     const expensePressHandler=()=>{
-     navigation.navigate("Manage Expense")
+     navigation.navigate("Manage Expense",{expenseId:id})
     }
   return (
     <Pressable onPress={expensePressHandler} style={({pressed})=>pressed && styles.pressed} android_ripple={{color:GlobalStyles.colors.prmiary350}}>
