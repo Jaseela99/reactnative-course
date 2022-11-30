@@ -51,7 +51,7 @@ export default function App() {
             );
           }}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item) => item.id}
         />
       </View>
     </View>
