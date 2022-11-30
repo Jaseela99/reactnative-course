@@ -1,17 +1,18 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { GlobalStyles } from "../constants/styles";
+import { getFormattedDate } from "../util/date";
 
 const ExpenseItem = ({description,amount,date}) => {
   return (
-    <Pressable android_ripple={{color:""}}>
+    <Pressable>
       <View style={styles.itemContainer}>
         <View style={styles.desContainer}>
           <Text style={[styles.description,styles.itemText]}>{description}</Text>
-          <Text style={styles.itemText}>{date.toString()}</Text>
+          <Text style={styles.itemText}>{getFormattedDate(date)}</Text>
         </View>
         <View style={styles.amountContainer}>
-        <Text style={styles.amount}>{amount}</Text>
+        <Text style={styles.amount}>{amount.toFixed(2)}</Text>
         </View>
       </View>
     </Pressable>
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     marginVertical:8,
     backgroundColor:GlobalStyles.colors.primary150,
     flexDirection:"row",
+    justifyContent:"space-between",
     borderRadius:6,
     elevatiion:2
   },
@@ -41,7 +43,9 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     alignItems:"center",
     paddingHorizontal:4,
-    paddingVertical:12
+    paddingVertical:12,
+    minWidth:80,
+    borderRadius:6
   },
   amount:{
     fontSize:16,
