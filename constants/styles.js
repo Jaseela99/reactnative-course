@@ -3,7 +3,7 @@ export const GlobalStyles={
     primary50:"#ffdab9",
     primary100:"#ffe4e1",
     primary150:"#ffa07a",
-    primary200:"#dc143c`",
+    primary200:"#dc143c",
     primary250:"#b22222",
     primary300:"#a52a2a",
     primary350:"#cd5c5c",
@@ -15,7 +15,7 @@ export const GlobalStyles={
     white:"#ffff",
     selected50:"#fafad2",
     selected100:"#ffe4c4",
-    selected150:"#ffd700",
+    error150:"#ff0000",
 
     }
 }

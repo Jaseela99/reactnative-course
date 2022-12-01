@@ -7,7 +7,7 @@ import {
 import React from "react";
 import { GlobalStyles } from "../../constants/styles";
 
-const Input = ({ label, textInputConfig ,style}) => {
+const Input = ({ label, textInputConfig ,style,inValid}) => {
   let inputStyle = [styles.input];
   if (textInputConfig && textInputConfig.multiline) {
     inputStyle.push(styles.labelMultiline);
@@ -15,7 +15,7 @@ const Input = ({ label, textInputConfig ,style}) => {
   return (
     <View style={[styles.inputContainer,style]}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput {...textInputConfig} style={inputStyle} />
+      <TextInput {...textInputConfig} style={[inputStyle,inValid && styles.inValidInput]} />
     </View>
   );
 };
@@ -45,4 +45,11 @@ const styles = StyleSheet.create({
     minHeight: 100,
     textAlignVertical: "top",
   },
+  inValidInput:{
+  borderColor:GlobalStyles.colors.error150,
+  borderWidth:2
+  },
+  inValidLabel:{
+  color:GlobalStyles.colors.error150
+  }
 });
