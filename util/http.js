@@ -2,11 +2,13 @@ import axios from "axios";
 
 const URL=  "https://react-native-course-bafab-default-rtdb.firebaseio.com"
 
-export const createExpense = (expenseData) => {
-  axios.post(
+export const createExpense =async (expenseData) => {
+const response=await axios.post(
     `${URL}/expenses.json`,
     expenseData
   );
+ const id= response.data.name //get hold of the id created by firebase
+ return id
 };
 
 export const getExpenses=async()=>{
