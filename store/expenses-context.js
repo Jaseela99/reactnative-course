@@ -12,7 +12,7 @@ const expensesReducer = (state, action) => {
   //reducer takes in state and action and returns new state from action
   switch (action.type) {
     case "ADD":
-      return [ ...action.payload, ...state];
+      return [ action.payload, ...state];
     case "SET":
       const inverted=action.payload.reverse()
       return inverted;
