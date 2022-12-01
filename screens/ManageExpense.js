@@ -6,9 +6,13 @@ import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ExpenseForm";
 import { createExpense, updateExpense ,deleteExpense} from "../util/http";
 import LoadingOverlay from "../components/UI components/LoadingOverlay"
+import ErrorOverlay from "../components/UI components/ErrorOverlay";
 
 const ManageExpense = ({ route, navigation }) => {
+
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null);
+
   const expensesContext = useContext(ExpensesContext);
   const editedExpenseId = route.params?.expenseId;
   const isEditing = !!editedExpenseId; //!! converts id to boolean to decide whether to add or update
@@ -26,27 +30,45 @@ const ManageExpense = ({ route, navigation }) => {
 
   const deleteExpenseHandler = async() => {
     setLoading(true)
-   await deleteExpense(editedExpenseId)
-    expensesContext.deleteExpense(editedExpenseId);
-    navigation.goBack();
-  };
-  const cancelHandler = () => {
-    navigation.goBack();
-  };
-  const confirmHandler =async (expenseData) => {
-    setLoading(true)
-    if (isEditing) {
-      expensesContext.updateExpense(editedExpenseId,expenseData);
-      await updateExpense(editedExpenseId,expenseData)
-    } else {
-     const id =await createExpense(expenseData)
-      expensesContext.addExpense({...expenseData,id:id});
+    try {
+      await deleteExpense(editedExpenseId)
+       expensesContext.deleteExpense(editedExpenseId);
+      
+    } catch (error) {
+      setError("could not delete expense -try again later!!")
+      setLoading(false)
     }
     navigation.goBack();
   };
+
+  const cancelHandler = () => {
+    navigation.goBack();
+  };
+ 
+
+  const confirmHandler =async (expenseData) => {
+    setLoading(true)
+    try {   
+      if (isEditing) {
+        expensesContext.updateExpense(editedExpenseId,expenseData);
+        await updateExpense(editedExpenseId,expenseData)
+      } else {
+       const id =await createExpense(expenseData)
+        expensesContext.addExpense({...expenseData,id:id});
+      }
+    } catch (error) {
+      setError("cannot save the data - some error occurred")
+      setLoading(false)
+    }
+    navigation.goBack();
+  };
+
   if(loading){
     return <LoadingOverlay/>
    }
+   if (error && !loading) {
+    return <ErrorOverlay message={error}/>;
+  }
   return (
     <View style={styles.container}>
       <ExpenseForm cancelHandler={cancelHandler}
