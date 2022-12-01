@@ -1,12 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import Input from "./UI components/Input";
+import CustomButton from "../components/UI components/CustomButton";
+import { getFormattedDate } from "../util/date";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({cancelHandler,confirmHandler,submitButtonLabel,selectedExpense}) => {
   const [input, setInput] = useState({
-    amount:"",
-    date:"",
-    description:""
+    amount:selectedExpense ? selectedExpense.amount.toString() :"", //amount to string
+    date: selectedExpense ? getFormattedDate(selectedExpense.date) :"", //formatted date
+    description:selectedExpense ? selectedExpense.description :""
   });
 
   const inputChangedHandler = (inputIdentifier,enteredValue) => {
@@ -17,7 +19,15 @@ const ExpenseForm = () => {
     }
   })
   };
- 
+ const onSubmit=()=>{
+     const expenseData={
+         amount:+input.amount, //+converts string to number
+         date:new Date(input.date),
+         description:input.description
+        }
+        confirmHandler(expenseData)
+
+ }
 
   return (
     <View style={styles.Container}>
@@ -54,6 +64,14 @@ const ExpenseForm = () => {
           value:input.description
         }}
       />
+       <View style={styles.buttonContainer}>
+        <CustomButton mode="flat" onPress={cancelHandler} style={styles.button}>
+          Cancel
+        </CustomButton>
+        <CustomButton onPress={onSubmit} style={styles.button}>
+          {submitButtonLabel}
+        </CustomButton>
+      </View>
     </View>
   );
 };
@@ -70,5 +88,14 @@ const styles = StyleSheet.create({
   },
   rowInput: {
     flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 20,
   },
 });
