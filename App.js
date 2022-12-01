@@ -45,25 +45,25 @@ const ViewExpenses = () => {
       })}
     >
       <Tab.Screen
-        name="All Expenses"
-        component={AllExpenses}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="calendar" size={size} color={color} />
-          ),
-          tabBarLabel: "All",
-        }}
-      />
-      <Tab.Screen
         name="Recent Expenses"
         component={RecentExpenses}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="hourglass" size={size} color={color} />
-          ),
-          tabBarLabel: "Recent",
-        }}
+            ),
+            tabBarLabel: "Recent",
+          }}
       />
+          <Tab.Screen
+            name="All Expenses"
+            component={AllExpenses}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="calendar" size={size} color={color} />
+              ),
+              tabBarLabel: "All",
+            }}
+          />
     </Tab.Navigator>
   );
 };
