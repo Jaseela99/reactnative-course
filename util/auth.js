@@ -12,10 +12,10 @@ export const authenticateUser = async (mode, email, password) => {
 };
 
 export const createUser = async (email, password) => {
-  authenticateUser("signUp", email, password);
+ await authenticateUser("signUp", email, password);
 };
 export const loginUser = async (email, password) => {
-  authenticateUser("signInWithPassword", email, password);
+  await authenticateUser("signInWithPassword", email, password);
 };
 
 
