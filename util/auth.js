@@ -9,13 +9,16 @@ export const authenticateUser = async (mode, email, password) => {
     password: password,
     recentSecureToken: true,
   });
+  const token=response.data.idToken
+  return token
 };
 
-export const createUser = async (email, password) => {
- await authenticateUser("signUp", email, password);
+export const createUser =  (email, password) => {
+ return authenticateUser("signUp", email, password);
+
 };
-export const loginUser = async (email, password) => {
-  await authenticateUser("signInWithPassword", email, password);
+export const loginUser =  (email, password) => {
+  return  authenticateUser("signInWithPassword", email, password);
 };
 
 
