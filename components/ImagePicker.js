@@ -6,6 +6,7 @@ import {
   PermissionStatus,
 } from "expo-image-picker";
 import { colors } from "../constants/colors";
+import CustomButton from "./UI/CustomButton";
 
 const ImagePicker = () => {
   const [pickedImage, setPickedImage] = useState();
@@ -44,7 +45,7 @@ const ImagePicker = () => {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button title="take image" onPress={takeImageHandler} />
+      <CustomButton icon="camera" onPress={takeImageHandler}>Click Picture</CustomButton>
     </View>
   );
 };
