@@ -36,7 +36,6 @@ const ImagePicker = () => {
     if (!image.canceled) {
         setPickedImage(image.assets[0].uri);
       }
-    console.log(image)
   };
   let imagePreview = <Text>No image taken</Text>;
   if (pickedImage) {
