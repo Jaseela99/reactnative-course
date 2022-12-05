@@ -39,7 +39,7 @@ const PlaceForm = ({onAddPlace}) => {
         />
       </View>
       <ImagePicker onTakeImage={onTakeImage} />
-      {/* <LocationPicker onPickLocation={onPickLocation} /> */}
+      <LocationPicker onPickLocation={onPickLocation} />
       <Button onPress={savePlaceHandler}>Submit</Button>
     </ScrollView>
   );

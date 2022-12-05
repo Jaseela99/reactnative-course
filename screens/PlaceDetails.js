@@ -7,7 +7,11 @@ import { fetchPlaceDetails } from '../util/database'
 const PlaceDetails = ({route,navigation}) => {
 const [placeDetails,setPlaceDetails]=useState()
   const showOnMap=()=>{
+   navigation.navigate("Map",{
+    // initialLat:placeDetails.location.lat,
+    // initialLng:placeDetails.location.lng
 
+   })
   }
   selectedPlaceId=route.params.placeId
   useEffect(() => {
@@ -33,7 +37,7 @@ const [placeDetails,setPlaceDetails]=useState()
       <Image style={styles.image} source={{uri:placeDetails.imageUri}}/>
       <View style={styles.locationContainer}>
         <View style={styles.addressContainer}>
-        <Text style={styles.address}>{placeDetails.title}</Text>
+        {/* <Text style={styles.address}>{placeDetails.address}</Text> change this to address once you get that */}
 
         </View>
       <CustomButton icon="map" onPress={showOnMap}>View on map</CustomButton>
