@@ -12,8 +12,8 @@ import {
   useRoute,
   useIsFocused,
 } from "@react-navigation/native";
-import { getMapPreview } from "../util/location";
-const LocationPicker = ({onPickLocation}) => {
+import { getAddress, getMapPreview } from "../util/location";
+const LocationPicker = ({ onPickLocation }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const [pickedLocation, setPickedLocation] = useState();
@@ -28,9 +28,18 @@ const LocationPicker = ({onPickLocation}) => {
       setPickedLocation(mapPickedLocation);
     }
   }, [route, isFocused]);
-  useEffect(()=>{
- onPickLocation(pickedLocation)
-  },[pickedLocation,onPickLocation])
+  useEffect(() => {
+    const handleLocation = async () => {
+      if (pickedLocation) {
+        const address = await getAddress(
+          pickedLocation.lat,
+          pickedLocation.lng
+        );
+        onPickLocation({ ...pickedLocation, address: address });
+      }
+    };
+    handleLocation();
+  }, [pickedLocation, onPickLocation]);
 
   const verifyPermission = async () => {
     if (locationPermisson.status === PermissionStatus.UNDETERMINED) {
@@ -61,7 +70,6 @@ const LocationPicker = ({onPickLocation}) => {
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
-    
   };
   let locationPreview = <Text>No location picked taken</Text>;
   if (pickedLocation) {
