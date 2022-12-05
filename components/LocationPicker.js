@@ -1,5 +1,5 @@
-import { StyleSheet, Image, View ,Text} from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Image, View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
 import CustomButton from "./UI/CustomButton";
 import { colors } from "../constants/colors";
 import {
@@ -7,12 +7,28 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
-import {useNavigation} from "@react-navigation/native"
-
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from "@react-navigation/native";
+import { getMapPreview } from "../util/location";
 const LocationPicker = () => {
-  const navigation=useNavigation()
+  const navigation = useNavigation();
+  const route = useRoute();
   const [pickedLocation, setPickedLocation] = useState();
+  const isFocused = useIsFocused();
   const [locationPermisson, requestPermission] = useForegroundPermissions();
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = {
+        lat: route.params.pickedLat,
+        lng: route.params.pickedLng,
+      };
+      setPickedLocation(mapPickedLocation);
+    }
+  }, [route, isFocused]);
+
   const verifyPermission = async () => {
     if (locationPermisson.status === PermissionStatus.UNDETERMINED) {
       //if status is undetermined
@@ -29,7 +45,7 @@ const LocationPicker = () => {
     return true;
   };
   const pickOnMapHandler = () => {
-    navigation.navigate("Map")
+    navigation.navigate("Map");
   };
 
   const locateUserHandler = async () => {
@@ -39,20 +55,22 @@ const LocationPicker = () => {
     }
     const location = await getCurrentPositionAsync();
     setPickedLocation({
-        lat:location.coords.latitude,
-        lng:location.coords.longitude
-    })
+      lat: location.coords.latitude,
+      lng: location.coords.longitude,
+    });
   };
   let locationPreview = <Text>No location picked taken</Text>;
   if (pickedLocation) {
-    locationPreview = <Image source={{uri:getMapPreview(pickedLocation.lat,pickedLocation.lng)}} style={styles.mapImage}/>
-
+    locationPreview = (
+      <Image
+        source={{ uri: getMapPreview(pickedLocation.lat, pickedLocation.lng) }}
+        style={styles.mapImage}
+      />
+    );
   }
   return (
     <View>
-      <View style={styles.mapPreview}>
-        {locationPreview}
-      </View>
+      <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.buttonContainer}>
         <CustomButton icon="location" onPress={locateUserHandler}>
           Locate User
@@ -82,9 +100,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray600,
     borderRadius: 8,
   },
-  mapImage:{
-    width:"100%",
-    height:"100%",
-    borderRadius:4
-  }
+  mapImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 4,
+  },
 });
