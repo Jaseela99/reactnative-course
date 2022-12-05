@@ -2,7 +2,7 @@ import { StyleSheet} from 'react-native'
 import React from 'react'
 import PlaceForm from "../components/PlaceForm"
 const AddPlace = ({navigation}) => {
-  const onAddPlace=()=>{
+  const onAddPlace=(place)=>{
    navigation.navigate('AllPlaces',{
     place:place
    })
