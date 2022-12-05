@@ -8,7 +8,7 @@ import {
 import { colors } from "../constants/colors";
 import CustomButton from "./UI/CustomButton";
 
-const ImagePicker = () => {
+const ImagePicker = ({onTakeImage}) => {
   const [pickedImage, setPickedImage] = useState();
 //   const [status, requestPermission] = useCameraPermissions();
 //   const verifyPermissionsIos = async () => {
@@ -35,6 +35,7 @@ const ImagePicker = () => {
     });
     if (!image.canceled) {
         setPickedImage(image.assets[0].uri);
+        onTakeImage(image.assets[0].uri)
       }
   };
   let imagePreview = <Text>No image taken</Text>;
